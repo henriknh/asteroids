@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://common/state_machine.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/enemy_medium.png" type="Texture" id=2]
+[ext_resource path="res://prefabs/tail.tscn" type="PackedScene" id=3]
+[ext_resource path="res://prefabs/ships/enemies/states/patrol.gd" type="Script" id=4]
+[ext_resource path="res://prefabs/ships/enemies/enemy.gd" type="Script" id=5]
+[ext_resource path="res://prefabs/ships/enemies/states/attack.gd" type="Script" id=6]
+[ext_resource path="res://prefabs/weapons/guns/gun.tscn" type="PackedScene" id=7]
+
+[sub_resource type="CircleShape2D" id=3]
+
+[node name="EnemyMedium" type="KinematicBody2D"]
+collision_layer = 5
+collision_mask = 48
+script = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[node name="Tail" parent="." instance=ExtResource( 3 )]
+
+[node name="Gun" parent="." instance=ExtResource( 7 )]
+gun_mode = 1
+trigger_automatric = true
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 1 )
+initial_state = NodePath("Patrol")
+
+[node name="Patrol" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )

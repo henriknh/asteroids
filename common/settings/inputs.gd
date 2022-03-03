@@ -1,0 +1,4 @@
+extends Node
+
+const MOUSE_SCREEN_ACC_FACTOR_MIN = 0.3
+const MOUSE_SCREEN_ACC_FACTOR_MAX = 0.7

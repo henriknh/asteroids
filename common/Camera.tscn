@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://prefabs/camera.gd" type="Script" id=1]
+[ext_resource path="res://common/screen_shake.gd" type="Script" id=2]
+
+[node name="Camera2D" type="Camera2D"]
+current = true
+script = ExtResource( 1 )
+zoom_factor = 0.0
+
+[node name="ScreenShake" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="ScreenShake"]
+
+[node name="Timer" type="Timer" parent="ScreenShake"]
+
+[connection signal="timeout" from="ScreenShake/Timer" to="ScreenShake" method="_on_Timer_timeout"]
